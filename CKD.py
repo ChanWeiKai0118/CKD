@@ -58,7 +58,25 @@ with st.form("CKD_form"):
         MuscleCramps = st.checkbox("Muscle Cramps")
 
     submitted = st.form_submit_button("Predict")
-
+st.markdown(
+    """
+    <style>
+    div.stButton > button:first-child {
+        background-color: #FF4B4B;
+        color: white;
+        border-radius: 5px; /* 圓角邊框 */
+        height: 50px;
+        width: 200px;
+        font-size: 20px;
+    }
+    div.stButton > button:first-child:hover {
+        background-color: #FF0000;
+        color: white;
+    }
+    </style>
+    """,
+    unsafe_allow_html=True
+)
 # Prediction logic
 if submitted:
     input_data1 = {
