@@ -70,7 +70,7 @@ st.markdown(
         font-size: 20px;
     }
     div.stButton > button:first-child:hover {
-        background-color: #FF3333;
+        background-color: #FF0000;
         color: white;
     }
     </style>
