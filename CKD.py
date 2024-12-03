@@ -31,23 +31,35 @@ scaler = joblib.load("robust_scaler.joblib")
 st.title("CKD Prediction")
 st.markdown("### Enter patient details below to predict CKD probability:")
 
+# Feature ranges (training set)
+feature_ranges = {
+    "SystolicBP (SBP)": (80, 200),
+    "DiastolicBP (DBP)": (50, 130),
+    "Fasting Blood Sugar": (70, 300),
+    "Serum Creatinine": (0.5, 10.0),
+    "BUN Levels": (5, 150),
+    "GFR": (10, 120),
+    "Protein in Urine": (0, 5),
+    "Cholesterol HDL": (20, 100)
+}
+
 # Input form
 with st.form("CKD_form"):
     col1, col2, col3, col4 = st.columns(4)
 
     with col1:
-        SBP = st.number_input("Systolic Blood Pressure (SBP)", min_value=0.0)
-        DBP = st.number_input("Diastolic Blood Pressure (DBP)", min_value=0.0)
-        Glucose = st.number_input("Fasting Blood Sugar", min_value=0.0)
+        SBP = st.number_input("Systolic Blood Pressure (SBP)", min_value=0, max_value=300, step=1)
+        DBP = st.number_input("Diastolic Blood Pressure (DBP)", min_value=0, max_value=200, step=1)
+        Glucose = st.number_input("Fasting Blood Sugar", min_value=0, max_value=500, step=1)
     
     with col2:
-        SCr = st.number_input("Serum Creatinine", min_value=0.0)
-        BUN = st.number_input("BUN Levels", min_value=0.0)
-        GFR = st.number_input("GFR", min_value=0.0)
+        SCr = st.number_input("Serum Creatinine", min_value=0.0, step=0.1)
+        BUN = st.number_input("BUN Levels", min_value=0, max_value=200, step=1)
+        GFR = st.number_input("GFR", min_value=0.0, step=0.1)
 
     with col3:
-        ProteinInUrine = st.number_input("Protein in Urine", min_value=0.0)
-        HDL = st.number_input("Cholesterol HDL", min_value=0.0)
+        ProteinInUrine = st.number_input("Protein in Urine", min_value=0.0, step=0.1)
+        HDL = st.number_input("Cholesterol HDL", min_value=0, max_value=200, step=1)
 
     with col4:
         Gender = st.radio("Gender", options=["Male", "Female"])
@@ -58,6 +70,8 @@ with st.form("CKD_form"):
         MuscleCramps = st.checkbox("Muscle Cramps")
 
     submitted = st.form_submit_button("Predict")
+
+# Style for button
 st.markdown(
     """
     <style>
@@ -77,6 +91,7 @@ st.markdown(
     """,
     unsafe_allow_html=True
 )
+
 # Prediction logic
 if submitted:
     input_data1 = {
@@ -116,7 +131,16 @@ if submitted:
     y_probabilities = LGBM_rg.predict_proba(input_data_final)[:, 1]
     for prob in y_probabilities:
         st.subheader("Prediction Results")
+        percentage_prob = prob * 100
         if prob >= 0.5:
-            st.success(f"**Probable CKD** with probability: {prob:.3f}")
+            st.success(f"**Probable CKD** with probability: {percentage_prob:.1f}%")
         else:
-            st.info(f"**Unlikely CKD** with probability: {prob:.3f}")
+            st.info(f"**Unlikely CKD** with probability: {percentage_prob:.1f}%")
+
+    # Feature range display
+    st.markdown("---")
+    st.markdown("### Feature Ranges from Training Data:")
+    for feature, (min_val, max_val) in feature_ranges.items():
+        st.markdown(f"- **{feature}**: Min = {min_val}, Max = {max_val}")
+    st.markdown("### Note:")
+    st.markdown("- **Prediction cutoff value**: 0.5 (50%)")
