@@ -43,6 +43,11 @@ feature_ranges = {
     "Cholesterol HDL": (20, 100)
 }
 
+# Display feature ranges
+st.markdown("### Feature Ranges from Training Data:")
+for feature, (min_val, max_val) in feature_ranges.items():
+    st.markdown(f"- **{feature}**: Min = {min_val}, Max = {max_val}")
+
 # Input form
 with st.form("CKD_form"):
     col1, col2, col3, col4 = st.columns(4)
@@ -130,15 +135,9 @@ if submitted:
     # Make predictions
     y_probabilities = LGBM_rg.predict_proba(input_data_final)[:, 1]
     for prob in y_probabilities:
-        st.subheader("Prediction Results (cutoff value : 50%)")
+        st.subheader("Prediction Results (cutoff value: 50%)")
         percentage_prob = prob * 100
         if prob >= 0.5:
             st.success(f"**Probable CKD** with probability: {percentage_prob:.1f}%")
         else:
             st.info(f"**Unlikely CKD** with probability: {percentage_prob:.1f}%")
-
-    # Feature range display
-    st.markdown("---")
-    st.markdown("### Feature Ranges from Training Data:")
-    for feature, (min_val, max_val) in feature_ranges.items():
-        st.markdown(f"- **{feature}**: Min = {min_val}, Max = {max_val}")
