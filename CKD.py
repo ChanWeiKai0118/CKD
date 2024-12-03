@@ -33,12 +33,12 @@ st.markdown("### Enter patient details below to predict CKD probability:")
 
 # Feature ranges (training set)
 feature_ranges = {
-    "SystolicBP (SBP)": (80, 200),
-    "DiastolicBP (DBP)": (50, 130),
-    "Fasting Blood Sugar": (70, 300),
-    "Serum Creatinine": (0.5, 10.0),
-    "BUN Levels": (5, 150),
-    "GFR": (10, 120),
+    "SystolicBP (SBP)": (90, 179),
+    "DiastolicBP (DBP)": (60, 119),
+    "Fasting Blood Sugar": (70, 200),
+    "Serum Creatinine": (0.5, 5),
+    "BUN Levels": (5, 50),
+    "GFR": (15.1, 120),
     "Protein in Urine": (0, 5),
     "Cholesterol HDL": (20, 100)
 }
@@ -130,7 +130,7 @@ if submitted:
     # Make predictions
     y_probabilities = LGBM_rg.predict_proba(input_data_final)[:, 1]
     for prob in y_probabilities:
-        st.subheader("Prediction Results")
+        st.subheader("Prediction Results (cutoff value : 50%)")
         percentage_prob = prob * 100
         if prob >= 0.5:
             st.success(f"**Probable CKD** with probability: {percentage_prob:.1f}%")
@@ -142,5 +142,3 @@ if submitted:
     st.markdown("### Feature Ranges from Training Data:")
     for feature, (min_val, max_val) in feature_ranges.items():
         st.markdown(f"- **{feature}**: Min = {min_val}, Max = {max_val}")
-    st.markdown("### Note:")
-    st.markdown("- **Prediction cutoff value**: 0.5 (50%)")
