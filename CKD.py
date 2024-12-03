@@ -29,7 +29,6 @@ scaler = joblib.load("robust_scaler.joblib")
 
 # Page styling
 st.title("CKD Prediction")
-st.markdown("### Enter patient details below to predict CKD probability:")
 
 # Feature ranges (training set)
 feature_ranges = {
@@ -47,7 +46,7 @@ feature_ranges = {
 st.markdown("### Feature Ranges from Training Data:")
 for feature, (min_val, max_val) in feature_ranges.items():
     st.markdown(f"- **{feature}**: Min = {min_val}, Max = {max_val}")
-
+st.markdown("### Enter patient details below to predict CKD probability:")
 # Input form
 with st.form("CKD_form"):
     col1, col2, col3, col4 = st.columns(4)
