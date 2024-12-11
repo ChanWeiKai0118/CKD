@@ -46,7 +46,7 @@ feature_ranges = {
     "Medication Adherence (0-10)": (0, 10),
     "Health Literacy (0-10)": (0, 10)
 }
-st.set_page_config(layout="wide")
+
 # Display feature ranges
 st.markdown("### Feature Ranges from Training Data:")
 for feature, (min_val, max_val) in feature_ranges.items():
@@ -56,7 +56,7 @@ st.markdown("### Enter patient details below to predict CKD probability:")
 
 # Input form
 with st.form("CKD_form"):
-    col1, col2, col3, col4, col5, col6 = st.columns(6)
+    col1, col2, col3, col4, col5 = st.columns(5)
 
     with col1:
         BMI = st.number_input("BMI", min_value=0.0, step=0.1)
@@ -86,7 +86,6 @@ with st.form("CKD_form"):
         MedicalCheckupsFrequency = st.slider("Medical Checkups Frequency (per year)", min_value=0, max_value=4, step=1)
         MedicationAdherence = st.slider("Medication Adherence (0-10)", min_value=0, max_value=10, step=1)
         HealthLiteracy = st.slider("Health Literacy (0-10)", min_value=0, max_value=10, step=1)
-    with col6:
         MuscleCramps = st.checkbox("Muscle Cramps")
         Itching = st.checkbox("Itching")
 
