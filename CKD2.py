@@ -46,7 +46,7 @@ feature_ranges = {
     "Medication Adherence (0-10)": (0, 10),
     "Health Literacy (0-10)": (0, 10)
 }
-
+st.set_page_config(layout="wide")
 # Display feature ranges
 st.markdown("### Feature Ranges from Training Data:")
 for feature, (min_val, max_val) in feature_ranges.items():
