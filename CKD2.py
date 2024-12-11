@@ -5,8 +5,8 @@ import requests
 from sklearn.preprocessing import RobustScaler
 
 # GitHub Raw URLs for model and scaler
-github_model_url = "https://raw.githubusercontent.com/ChanWeiKai0118/CKD/main/LGB%20model.pkl"
-scaler_url = "https://raw.githubusercontent.com/ChanWeiKai0118/CKD/main/scaler_sel.joblib"
+github_model_url = "https://raw.githubusercontent.com/ChanWeiKai0118/CKD/main/LGB%20model2.pkl"
+scaler_url = "https://raw.githubusercontent.com/ChanWeiKai0118/CKD/main/scaler_sel2.joblib"
 
 # Load the model
 response = requests.get(github_model_url)
