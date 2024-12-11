@@ -117,12 +117,12 @@ if submitted:
         'CholesterolTotal': [CholesterolTotal],
         'CholesterolHDL': [CholesterolHDL],
         'CholesterolTriglycerides': [CholesterolTriglycerides],
+        'MuscleCramps': [int(MuscleCramps)],
+        'Itching': [int(Itching)],
         'QualityOfLifeScore': [QualityOfLifeScore],
         'MedicalCheckupsFrequency': [MedicalCheckupsFrequency],
         'MedicationAdherence': [MedicationAdherence],
-        'HealthLiteracy': [HealthLiteracy],
-        'MuscleCramps': [int(MuscleCramps)],
-        'Itching': [int(Itching)]
+        'HealthLiteracy': [HealthLiteracy]
     }
 
     input_df = pd.DataFrame(input_data)
