@@ -90,10 +90,10 @@ with st.form("CKD_form"):
         HealthLiteracy = st.slider("Health Literacy (0-10)", min_value=0, max_value=10, step=1)
         MuscleCramps = st.checkbox("Muscle Cramps")
         Itching = st.checkbox("Itching")
-    st.write("Scaler feature names:", scaler.feature_names_in_)
+    
     
     submitted = st.form_submit_button("Predict")
-    st.write("Input feature names:", input_df.columns)
+    
 
 
 
@@ -125,10 +125,13 @@ if submitted:
     }
 
     input_df = pd.DataFrame(input_data)
-
+    st.write("Scaler feature names:", scaler.feature_names_in_)
+    st.write("Input feature names:", input_df.columns)
+    
     # Scale numerical data
     input_data_scaled = scaler.transform(input_df)
     input_df_scaled = pd.DataFrame(input_data_scaled, columns=input_df.columns)
+    
 
     # Make predictions
     y_probabilities = new_model.predict_proba(input_df_scaled)[:, 1]
