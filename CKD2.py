@@ -126,8 +126,6 @@ if submitted:
     }
 
     input_df = pd.DataFrame(input_data)
-    st.write("Scaler feature names:", scaler.feature_names_in_)
-    st.write("Input feature names:", input_df.columns)
     
     # Scale numerical data
     input_data_scaled = scaler.transform(input_df)
