@@ -91,8 +91,9 @@ with st.form("CKD_form"):
         MuscleCramps = st.checkbox("Muscle Cramps")
         Itching = st.checkbox("Itching")
     st.write("Scaler feature names:", scaler.feature_names_in_)
-    st.write("Input feature names:", input_df.columns)
+    
     submitted = st.form_submit_button("Predict")
+    st.write("Input feature names:", input_df.columns)
 
 
 
