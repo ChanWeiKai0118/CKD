@@ -84,12 +84,13 @@ with st.form("CKD_form"):
         CholesterolHDL = st.number_input("Cholesterol HDL", min_value=0, max_value=200, step=1)
         CholesterolTriglycerides = st.number_input("Cholesterol Triglycerides", min_value=0, max_value=500, step=1)
     with col5:
+        MuscleCramps = st.checkbox("Muscle Cramps")
+        Itching = st.checkbox("Itching")
         QualityOfLifeScore = st.slider("Quality of Life Score (0-100)", min_value=0, max_value=100, step=1)
         MedicalCheckupsFrequency = st.slider("Medical Checkups Frequency (per year)", min_value=0, max_value=4, step=1)
         MedicationAdherence = st.slider("Medication Adherence (0-10)", min_value=0, max_value=10, step=1)
         HealthLiteracy = st.slider("Health Literacy (0-10)", min_value=0, max_value=10, step=1)
-        MuscleCramps = st.checkbox("Muscle Cramps")
-        Itching = st.checkbox("Itching")
+        
     
     
     submitted = st.form_submit_button("Predict")
