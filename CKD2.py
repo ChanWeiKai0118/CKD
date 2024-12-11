@@ -56,7 +56,7 @@ st.markdown("### Enter patient details below to predict CKD probability:")
 
 # Input form
 with st.form("CKD_form"):
-    col1, col2, col3, col4 = st.columns(4)
+    col1, col2, col3, col4, col5, col6 = st.columns(6)
 
     with col1:
         BMI = st.number_input("BMI", min_value=0.0, step=0.1)
