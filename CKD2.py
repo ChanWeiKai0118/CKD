@@ -54,8 +54,7 @@ for feature, (min_val, max_val) in feature_ranges.items():
 
 st.markdown("### Enter patient details below to predict CKD probability:")
 
-st.write("Scaler feature names:", scaler.feature_names_in_)
-st.write("Input feature names:", input_df.columns)
+
 
 # Input form
 with st.form("CKD_form"):
@@ -91,7 +90,8 @@ with st.form("CKD_form"):
         HealthLiteracy = st.slider("Health Literacy (0-10)", min_value=0, max_value=10, step=1)
         MuscleCramps = st.checkbox("Muscle Cramps")
         Itching = st.checkbox("Itching")
-
+    st.write("Scaler feature names:", scaler.feature_names_in_)
+    st.write("Input feature names:", input_df.columns)
     submitted = st.form_submit_button("Predict")
 
 
